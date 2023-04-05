@@ -9,15 +9,32 @@
     <script src="script.js"></script>
 </head>
 <body onload="load_pokemons()">
-
-  <!--   <div id="small_charts"> -->
-
-    <div id="pokedex">
-        <h1 id="pokemon_name">name</h1>
+    </div class="outer_containe"r>
+        <div class="infocard_container">
+            <div class="infocard_upperPart">
+                <h1 id="pokemon_name">name</h1>
+                <img class="pokemon_small_image" id="pokemon_small_image">
+            </div>
+            <div class="infocard_lowerPart">
+                <table>
+                    <tr>
+                        <td>Name</td><td id="name"></td>
+                    </tr>
+                    <tr>
+                        <td>Type</td><td id="type"></td>
+                    </tr>
+                    <tr>
+                        <td>Height</td><td id="height"></td>
+                    </tr>
+                    <tr>
+                        <td>Weight</td><td id="weight"></td>
+                    </tr>
+                    <tr>
+                        <td>Abilities</td><td id="abilities"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
-    <div class="info_container">
-        <img id="pokemon_small_images">
-    </div>
-    
 </body>
 </html>

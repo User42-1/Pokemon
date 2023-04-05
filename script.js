@@ -44,17 +44,17 @@ async function load_pokemons() {
     let current_pokemon = await response.json();
     all_pokemon.push(current_pokemon);
     console.log('loaded pokemon:' , current_pokemon);
-    render_current_pokemonCard(current_pokemon);
+    render_pokemon_infocard(current_pokemon);
     }
 }
 
-function render_current_pokemonCard(current_pokemon) {
+function render_pokemon_infocard(current_pokemon) {
     /*   for (let i = 0; i < pokemons.length; i++) {
           const pokemon = pokemons[i];
   
           document.getElementById('small_charts').innerHTML = current_pokemon['name']; */
       document.getElementById('pokemon_name').innerHTML = current_pokemon['name'];
-      document.getElementById('pokemon_small_images').src = current_pokemon['sprites']['other']['official-artwork']['front_shiny'];
+      document.getElementById('pokemon_small_image').src = current_pokemon['sprites']['other']['official-artwork']['front_shiny'];
   }
 
 
