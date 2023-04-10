@@ -6,35 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokedex</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <script defer src="script.js"></script>
 </head>
-<body onload="load_pokemons()">
-    </div class="outer_containe"r>
-        <div class="infocard_container">
+<body onload="init()">
+    <div class="outer_container">
+        <div id="all_pokemon_sprite_container" class="all_pokemon_sprite_container">
+            <!-- <img id="pokemon_sprite" class="pokemon_sprite"> -->
+        </div>
+        <div class="header">
+            <button class="btn_futher_pokemon" onclick="load_further20_pokemonObjects(20)">Load new pokemon</button>
+            <div>
+                <input id="input" type="text" placeholder="A B C D E F">
+                <button class="btn_select_by_first_letter">Select</button>
+            </div>
+        </div>
+        <div id="infocard_container"></div>
+    <!-- <div id="infocard_container" class="infocard_container d_none">
             <div class="infocard_upperPart">
-                <h1 id="pokemon_name">name</h1>
-                <img class="pokemon_small_image" id="pokemon_small_image">
+                <h2 id="pokemon_name">name</h2>
             </div>
             <div class="infocard_lowerPart">
                 <table>
                     <tr>
-                        <td>Name</td><td id="name"></td>
+                        <td>Name:</td><td id="name">name</td>
                     </tr>
                     <tr>
-                        <td>Type</td><td id="type"></td>
+                        <td>Type:</td><td id="type">type</td>
                     </tr>
                     <tr>
-                        <td>Height</td><td id="height"></td>
+                        <td>Height:</td><td id="height">height</td>
                     </tr>
                     <tr>
-                        <td>Weight</td><td id="weight"></td>
+                        <td>Weight:</td><td id="weight">weight</td>
                     </tr>
                     <tr>
-                        <td>Abilities</td><td id="abilities"></td>
+                        <td>Abilities:</td><td id="abilities">abilities</td>
                     </tr>
                 </table>
             </div>
-        </div>
+        </div> -->
     </div>
 </body>
 </html>
