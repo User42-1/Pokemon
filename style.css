@@ -3,7 +3,7 @@ body {
 }
 
 .d_none {
-    visibility: hidden;
+    display: none;
 }
 
 .outer_container {
