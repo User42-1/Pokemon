@@ -117,7 +117,7 @@ async function remove_infocard_container() {
 async function searchAllPokemonNamesUrls() {
     allSelectedPokemonUrls = [];
     let searchString = document.getElementById('searchString')
-    search = searchString.value;
+    search = searchString.value.toLowerCase();
     alert(search);
     for (let i = 0; i < allPokemonNamesUrls.length; i++) {
         if(allPokemonNamesUrls[i]['name'].toLowerCase().startsWith(search)) {
