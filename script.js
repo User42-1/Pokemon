@@ -1,12 +1,14 @@
 let allPokemonNamesUrls = [];  // #1 through #1010 in arrays [0...99],...,[900...999],[1000...1009]
 let allPokemonObjects = [];   // #1 is in array 0 and so on
+let allSelectedPokemonUrls = [];
+let pokemonStartId = 31;
 
 async function init() {
     await load_allPokemonNamesUrls();
     await load_first30_pokemonObjects();
-    /* await load_further20_pokemonObjects(31); */  // is called with a button (or when the page is scrolled downwords - not implemented yet)
     await render_first31_pokemon_overview();
-}
+/*     await searchAllPokemonByName();
+ */}
 
 async function load_allPokemonNamesUrls() {
     let url = 'https://pokeapi.co/api/v2/pokemon/?limit=1010&offset=0';
@@ -22,7 +24,7 @@ async function load_first30_pokemonObjects() {
     }
 }
 
-async function load_further20_pokemonObjects(pokemonStartId) {
+async function load_further20_pokemonObjects() {  // is called with a button (or when the page is scrolled downwords - not implemented yet)
     for (let i = pokemonStartId; i < (pokemonStartId+20); i++) {
         let url = 'https://pokeapi.co/api/v2/pokemon/' + i;
         let response = await fetch(url);
@@ -30,6 +32,7 @@ async function load_further20_pokemonObjects(pokemonStartId) {
         allPokemonObjects.push(currentPokemonObject);
     }
     render_further20_pokemon_overview(pokemonStartId);
+    pokemonStartId += 20;
 }
 
 async function render_first31_pokemon_overview() {
@@ -48,8 +51,7 @@ async function render_first31_pokemon_overview() {
 
 function show_infocard_container(i) {
     let content_infocard = document.getElementById('infocard_container');
-    content_infocard.classList.remove('d_none');
- /* content_infocard.classList.toggle('d_none'); */
+        content_infocard.classList.remove('d_none');
     let pokemont_sprite_name = allPokemonObjects[i]['name'];
     let pokemont_sprite_src = allPokemonObjects[i]['sprites']['other']['official-artwork']['front_shiny'];
     let pokemont_sprite_type = allPokemonObjects[i]['types'][0]['type']['name'];
@@ -106,4 +108,20 @@ async function render_further20_pokemon_overview(pokemonStartId) {
 
 async function remove_infocard_container() {
     document.getElementById('infocard_container').classList.add('d_none');
+}
+
+
+/* ************** Pokemon-Selection ***************+ */
+
+
+async function searchAllPokemonNamesUrls() {
+    allSelectedPokemonUrls = [];
+    let searchString = document.getElementById('searchString')
+    search = searchString.value;
+    alert(search);
+    for (let i = 0; i < allPokemonNamesUrls.length; i++) {
+        if(allPokemonNamesUrls[i]['name'].toLowerCase().startsWith(search)) {
+            allSelectedPokemonUrls.push(allPokemonNamesUrls[i]['name']);
+        }  
+    }
 }
