@@ -167,3 +167,5 @@ async function selected_render_first_pokemons_overview() {
                             `;
     }
 }
+
+/* with corrected commit */
