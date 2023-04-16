@@ -58,47 +58,52 @@ function render_first31_pokemons_overview() {
 }
 
 function show_infocard_container(i) {
-    let content_infocard = document.getElementById('infocard_container');
-        content_infocard.classList.remove('d_none');
-    let pokemont_sprite_name = allPokemonObjects[i]['name'];
-    let pokemont_sprite_src = allPokemonObjects[i]['sprites']['other']['official-artwork']['front_shiny'];
-    let pokemont_sprite_type = allPokemonObjects[i]['types'][0]['type']['name'];
-    let pokemont_sprite_weight = allPokemonObjects[i]['weight'];
-    let pokemont_sprite_height = allPokemonObjects[i]['height'];
-    let pokemont_sprite_stats0 = allPokemonObjects[i]['stats'][0]['base_stat'];
-    let pokemont_sprite_stats1 = allPokemonObjects[i]['stats'][1]['base_stat'];
-    let pokemont_sprite_stats2 = allPokemonObjects[i]['stats'][2]['base_stat'];
-    content_infocard.innerHTML += `
-        <div id="infocard_container" class="infocard_container">
-            <div class="infocard_upperPart">
-                <h1 id="pokemon_name">${pokemont_sprite_name}</h1>
-                <div class="small_sprite_container"><img src="${pokemont_sprite_src}" class="pokemon_sprite_small_image"></div>
-            </div>
-            <div class="infocard_lowerPart">
-                <table>
-                    <tr>
-                        <td>Type:</td><td id="type">${pokemont_sprite_type}</td>
-                    </tr>
-                    <tr>
-                        <td>Height:</td><td id="height">${pokemont_sprite_height} dm</td>
-                    </tr>
-                    <tr>
-                        <td>Weight:</td><td id="weight">${pokemont_sprite_weight} kg</td>
-                    </tr>
-                    <tr>
-                        <td>Hp:</td><td id="abilities">${pokemont_sprite_stats0} Hp</td>
-                    </tr>
-                    <tr>
-                        <td>Attack:</td><td id="abilities">${pokemont_sprite_stats1} At</td>
-                    </tr>
-                    <tr>
-                        <td>Defense:</td><td id="abilities">${pokemont_sprite_stats2} De</td>
-                    </tr>
-                </table>
-            </div>
-        </div>   
-        `;
-        event.stopPropagation();
+    if(searchIsActive) {
+        pokemenObjects_toBeSearchedIn = selected_allPokemonObjects;
+    } else {
+        pokemenObjects_toBeSearchedIn = allPokemonObjects;
+    }
+        let content_infocard = document.getElementById('infocard_container');
+            content_infocard.classList.remove('d_none');
+        let pokemont_sprite_name = pokemenObjects_toBeSearchedIn[i]['name'];
+        let pokemont_sprite_src = pokemenObjects_toBeSearchedIn[i]['sprites']['other']['official-artwork']['front_shiny'];
+        let pokemont_sprite_type = pokemenObjects_toBeSearchedIn[i]['types'][0]['type']['name'];
+        let pokemont_sprite_weight = pokemenObjects_toBeSearchedIn[i]['weight'];
+        let pokemont_sprite_height = pokemenObjects_toBeSearchedIn[i]['height'];
+        let pokemont_sprite_stats0 = pokemenObjects_toBeSearchedIn[i]['stats'][0]['base_stat'];
+        let pokemont_sprite_stats1 = pokemenObjects_toBeSearchedIn[i]['stats'][1]['base_stat'];
+        let pokemont_sprite_stats2 = pokemenObjects_toBeSearchedIn[i]['stats'][2]['base_stat'];
+        content_infocard.innerHTML += `
+            <div id="infocard_container" class="infocard_container">
+                <div class="infocard_upperPart">
+                    <h1 id="pokemon_name">${pokemont_sprite_name}</h1>
+                    <div class="small_sprite_container"><img src="${pokemont_sprite_src}" class="pokemon_sprite_small_image"></div>
+                </div>
+                <div class="infocard_lowerPart">
+                    <table>
+                        <tr>
+                            <td>Type:</td><td id="type">${pokemont_sprite_type}</td>
+                        </tr>
+                        <tr>
+                            <td>Height:</td><td id="height">${pokemont_sprite_height} dm</td>
+                        </tr>
+                        <tr>
+                            <td>Weight:</td><td id="weight">${pokemont_sprite_weight} kg</td>
+                        </tr>
+                        <tr>
+                            <td>Hp:</td><td id="abilities">${pokemont_sprite_stats0} Hp</td>
+                        </tr>
+                        <tr>
+                            <td>Attack:</td><td id="abilities">${pokemont_sprite_stats1} At</td>
+                        </tr>
+                        <tr>
+                            <td>Defense:</td><td id="abilities">${pokemont_sprite_stats2} De</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>   
+            `;
+            event.stopPropagation();
 }
 
 async function render_further20_pokemon_overview(pokemonStartId) {
