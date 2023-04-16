@@ -128,13 +128,18 @@ async function searchAllPokemonNamesUrls() {
     selected_allPokemonUrls = [];
     let searchString = document.getElementById('searchString')
     search = searchString.value.toLowerCase();
-    alert(search);
-    for (let i = 0; i < allPokemonNamesUrls.length; i++) {
-        if(allPokemonNamesUrls[i]['name'].toLowerCase().startsWith(search)) {
-            selected_allPokemonUrls.push(allPokemonNamesUrls[i]['url']);
-        }  
-    }
-    await selected_load_first_pokemonObjects();
+    if(search) {
+        alert(search);
+        for (let i = 0; i < allPokemonNamesUrls.length; i++) {
+            if(allPokemonNamesUrls[i]['name'].toLowerCase().startsWith(search)) {
+                selected_allPokemonUrls.push(allPokemonNamesUrls[i]['url']);
+            }  
+        }
+        await selected_load_first_pokemonObjects();
+    } else {
+        searchIsActive = false;
+        await init();
+    }   
 }
 
 async function selected_load_first_pokemonObjects() {
