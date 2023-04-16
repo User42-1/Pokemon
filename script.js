@@ -1,14 +1,20 @@
 let allPokemonNamesUrls = [];  // #1 through #1010 in arrays [0...99],...,[900...999],[1000...1009]
 let allPokemonObjects = [];   // #1 is in array 0 and so on
-let allSelectedPokemonUrls = [];
-let pokemonStartId = 31;
+let furtherPokemonStartId = 31;
+let searchIsActive = false;
+
+let selected_allPokemonUrls = [];
+let selected_allPokemonObjects = [];
 
 async function init() {
-    await load_allPokemonNamesUrls();
-    await load_first30_pokemonObjects();
-    await render_first31_pokemon_overview();
-/*     await searchAllPokemonByName();
- */}
+    if(searchIsActive) {
+        await load_allPokemonNamesUrls();
+        await searchAllPokemonNamesUrls(); 
+    } else {
+        await load_allPokemonNamesUrls();
+        await load_first30_pokemonObjects();
+    }
+ }
 
 async function load_allPokemonNamesUrls() {
     let url = 'https://pokeapi.co/api/v2/pokemon/?limit=1010&offset=0';
@@ -16,28 +22,30 @@ async function load_allPokemonNamesUrls() {
  }
 
 async function load_first30_pokemonObjects() {
+    allPokemonObjects = [];
     for (let i = 1; i < 31; i++) {
         let url = 'https://pokeapi.co/api/v2/pokemon/' + i;
         let response = await fetch(url);
         let currentPokemonObject = await response.json();
         allPokemonObjects.push(currentPokemonObject);
     }
+    render_first31_pokemons_overview();
 }
 
 async function load_further20_pokemonObjects() {  // is called with a button (or when the page is scrolled downwords - not implemented yet)
-    for (let i = pokemonStartId; i < (pokemonStartId+20); i++) {
+    for (let i = furtherPokemonStartId; i < (furtherPokemonStartId+20); i++) {
         let url = 'https://pokeapi.co/api/v2/pokemon/' + i;
         let response = await fetch(url);
         let currentPokemonObject = await response.json();
         allPokemonObjects.push(currentPokemonObject);
     }
-    render_further20_pokemon_overview(pokemonStartId);
-    pokemonStartId += 20;
+    render_further20_pokemon_overview(furtherPokemonStartId);
+    furtherPokemonStartId += 20;
 }
 
-async function render_first31_pokemon_overview() {
+function render_first31_pokemons_overview() {
     let content_container = document.getElementById('all_pokemon_sprite_container');
-    content_container.innerHTML += ``;
+    content_container.innerHTML = ``;
     for (let i = 0; i < allPokemonObjects.length; i++) {
         let pokemont_sprite_src = allPokemonObjects[i]['sprites']['other']['official-artwork']['front_shiny'];
         let pokemont_sprite_name = allPokemonObjects[i]['name'];
@@ -115,13 +123,42 @@ async function remove_infocard_container() {
 
 
 async function searchAllPokemonNamesUrls() {
-    allSelectedPokemonUrls = [];
+    searchIsActive = true;
+    await load_allPokemonNamesUrls();
+    selected_allPokemonUrls = [];
     let searchString = document.getElementById('searchString')
     search = searchString.value.toLowerCase();
     alert(search);
     for (let i = 0; i < allPokemonNamesUrls.length; i++) {
         if(allPokemonNamesUrls[i]['name'].toLowerCase().startsWith(search)) {
-            allSelectedPokemonUrls.push(allPokemonNamesUrls[i]['name']);
+            selected_allPokemonUrls.push(allPokemonNamesUrls[i]['url']);
         }  
+    }
+    await selected_load_first_pokemonObjects();
+}
+
+async function selected_load_first_pokemonObjects() {
+    selected_allPokemonObjects = [];
+    let number_of_selected_objects = selected_allPokemonUrls.length;
+    for (let i = 0; i < number_of_selected_objects; i++) {
+        let url = selected_allPokemonUrls[i];
+        let response = await fetch(url);
+        let currentPokemonObject = await response.json();
+        selected_allPokemonObjects.push(currentPokemonObject);
+    }
+    await selected_render_first_pokemons_overview();
+}
+
+async function selected_render_first_pokemons_overview() {
+    let content_container = document.getElementById('all_pokemon_sprite_container');
+    content_container.innerHTML = ``;
+    for (let i = 0; i < selected_allPokemonObjects.length; i++) {
+        let pokemont_sprite_src = selected_allPokemonObjects[i]['sprites']['other']['official-artwork']['front_shiny'];
+        let pokemont_sprite_name = selected_allPokemonObjects[i]['name'];
+        content_container.innerHTML += `<div class="pokemon_sprite_container">
+                                            <img src="${pokemont_sprite_src}" class="pokemon_sprite_image" onclick="show_infocard_container(${i})">  
+                                            <div class="pokeman_sprite_name">${pokemont_sprite_name}</div>
+                                        </div>
+                            `;
     }
 }
