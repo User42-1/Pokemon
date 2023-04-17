@@ -86,37 +86,8 @@ function show_infocard_container(i) {
         let pokemont_sprite_stats0 = pokemenObjects_toBeSearchedIn[i]['stats'][0]['base_stat'];
         let pokemont_sprite_stats1 = pokemenObjects_toBeSearchedIn[i]['stats'][1]['base_stat'];
         let pokemont_sprite_stats2 = pokemenObjects_toBeSearchedIn[i]['stats'][2]['base_stat'];
-        content_infocard.innerHTML += `
-            <div id="infocard_container" class="infocard_container">
-                <div class="infocard_upperPart">
-                    <h1 id="pokemon_name">${pokemont_sprite_name}</h1>
-                    <div class="small_sprite_container"><img src="${pokemont_sprite_src}" class="pokemon_sprite_small_image"></div>
-                </div>
-                <div class="infocard_lowerPart">
-                    <table>
-                        <tr>
-                            <td>Type:</td><td id="type">${pokemont_sprite_type}</td>
-                        </tr>
-                        <tr>
-                            <td>Height:</td><td id="height">${pokemont_sprite_height/10} m</td>
-                        </tr>
-                        <tr>
-                            <td>Weight:</td><td id="weight">${pokemont_sprite_weight/10} kg</td>
-                        </tr>
-                        <tr>
-                            <td>Hp:</td><td id="abilities">${pokemont_sprite_stats0} Hp</td>
-                        </tr>
-                        <tr>
-                            <td>Attack:</td><td id="abilities">${pokemont_sprite_stats1} At</td>
-                        </tr>
-                        <tr>
-                            <td>Defense:</td><td id="abilities">${pokemont_sprite_stats2} De</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>   
-            `;
-            event.stopPropagation();
+        content_infocard.innerHTML += generateHTMLInfocardContainer(pokemont_sprite_name,pokemont_sprite_src,pokemont_sprite_type,pokemont_sprite_height,pokemont_sprite_weight,pokemont_sprite_stats0,pokemont_sprite_stats1,pokemont_sprite_stats2);
+        event.stopPropagation();
 }
 
 
@@ -126,7 +97,6 @@ async function remove_infocard_container() {
 
 
 /* ************** Pokemon-Selection ***************+ */
-
 
 async function searchAllPokemonNamesUrls() {
     searchIsActive = true;
@@ -183,5 +153,38 @@ function enable_btn_load_new_pokemon() {
     document.getElementById('btn_futher_pokemon').disabled = false;
 }
 
-/* HTML_template */
 
+/* ************** HTML_template ***************+ */
+
+function generateHTMLInfocardContainer(pokemont_sprite_name,pokemont_sprite_src,pokemont_sprite_type,pokemont_sprite_height,pokemont_sprite_weight,pokemont_sprite_stats0,pokemont_sprite_stats1,pokemont_sprite_stats2) {
+    return`
+    <div id="infocard_container" class="infocard_container">
+        <div class="infocard_upperPart">
+            <h1 id="pokemon_name">${pokemont_sprite_name}</h1>
+            <div class="small_sprite_container"><img src="${pokemont_sprite_src}" class="pokemon_sprite_small_image"></div>
+        </div>
+        <div class="infocard_lowerPart">
+            <table>
+                <tr>
+                    <td>Type:</td><td id="type">${pokemont_sprite_type}</td>
+                </tr>
+                <tr>
+                    <td>Height:</td><td id="height">${pokemont_sprite_height/10} m</td>
+                </tr>
+                <tr>
+                    <td>Weight:</td><td id="weight">${pokemont_sprite_weight/10} kg</td>
+                </tr>
+                <tr>
+                    <td>Hp:</td><td id="abilities">${pokemont_sprite_stats0} Hp</td>
+                </tr>
+                <tr>
+                    <td>Attack:</td><td id="abilities">${pokemont_sprite_stats1} At</td>
+                </tr>
+                <tr>
+                    <td>Defense:</td><td id="abilities">${pokemont_sprite_stats2} De</td>
+                </tr>
+            </table>
+        </div>
+    </div>   
+    `
+}
