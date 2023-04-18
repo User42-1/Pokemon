@@ -17,15 +17,15 @@ body {
     background: linear-gradient(217deg, rgba(255, 0, 0, .8), rgba(255, 0, 0, 0) 70.71%),
         linear-gradient(127deg, rgba(0, 255, 0, .8), rgba(0, 255, 0, 0) 70.71%),
         linear-gradient(336deg, rgba(0, 0, 255, .8), rgba(0, 0, 255, 0) 70.71%);
-    /*  background-color: rgba(231, 188, 133, 0.9); */
 }
 
 .infocard_container {
     position: fixed;
     top: 20%;
-    left: 30%;
-    right: 30%;
-    height: 60vh;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
     width: 300px;
     border: 2px solid black;
     border-radius: 10px;
@@ -38,9 +38,9 @@ body {
     height: 50%;
     width: 100%;
     color: white;
-    background: linear-gradient(217deg, rgba(255, 0, 0, .8), rgba(255, 0, 0, 0) 100%),
-        linear-gradient(127deg, rgba(0, 255, 0, .8), rgba(0, 255, 0, 0) 100%),
-        linear-gradient(336deg, rgba(0, 0, 255, .8), rgba(0, 0, 255, 0) 100%);
+    background: linear-gradient(217deg, rgba(255, 0, 0, .99), rgba(255, 0, 0, 0) 100%),
+        linear-gradient(127deg, rgba(0, 255, 0, .99), rgba(0, 255, 0, 0) 100%),
+        linear-gradient(336deg, rgba(0, 0, 255, .99), rgba(0, 0, 255, 0) 100%);
     /* background-color: rgba(129, 122, 122, 0.9); */
     border-radius: 10px;
     display: flex;
@@ -57,7 +57,7 @@ h1 {
 
 .infocard_lowerPart {
     height: 50%;
-    background-color: white;
+    background-color: rgba(245, 243, 240, 0.99);
     border-radius: 10px;
     margin-top: -10%;
     z-index: 2;
@@ -79,7 +79,6 @@ h1 {
     background: linear-gradient(217deg, rgba(255, 0, 0, .8), rgba(255, 0, 0, 0) 70.71%),
         linear-gradient(127deg, rgba(0, 255, 0, .8), rgba(0, 255, 0, 0) 70.71%),
         linear-gradient(336deg, rgba(0, 0, 255, .8), rgba(0, 0, 255, 0) 70.71%);
-    /* background-color: rgb(9, 148, 39); */
     height: 170px;
     width: 170px;
     border: solid white;
@@ -97,16 +96,30 @@ h1 {
 .small_sprite_container {
     width: 300px;
     display: flex;
+    display: flex;
     justify-content: center;
-    /*     align-items: center;
- */
     z-index: 5;
 }
 
 .pokemon_sprite_small_image {
-    height: 100px;
-    width: 100px;
+    height: 120px;
+    width: 120px;
+    padding: 5px;
+    margin-right: 15px;
+    margin-left: 15px;
     z-index: 5;
+}
+
+.arrow {
+    /* replaced with pokemon_sprites */
+    width: 45px;
+    height: 45px;
+    margin-top: 15px;
+    padding: 5px;
+}
+
+.arrow:hover {
+    cursor: pointer;
 }
 
 table {
@@ -145,8 +158,23 @@ td {
     background-color: rgb(109, 94, 94);
     border: solid white;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+}
+
+.btn_futher_pokemon {
+    position: fixed;
+    bottom: 3%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+    height: 40px;
+    border: 2px solid black;
+    border-radius: 10px;
+    opacity: 0.8;
+    z-index: 10 !important;
 }
 
 input {
@@ -156,33 +184,4 @@ input {
 input::placeholder {
     color: rgb(185, 180, 180);
     text-align: center;
-}
-
-@media(max-width: 600px) {
-    .infocard_container {
-        left: 20%;
-    }
-}
-
-@media(max-width: 425px) {
-    .infocard_container {
-        left: 15%;
-    }
-
-    .header {
-        padding-right: 10px;
-        padding-left: 10px;
-    }
-}
-
-@media(max-width: 390px) {
-    .infocard_container {
-        left: 7%;
-    }
-}
-
-@media(max-width: 390px) {
-    .infocard_container {
-        left: 4%;
-    }
 }

@@ -79,18 +79,25 @@ function show_infocard_container(i) {
         let content_infocard = document.getElementById('infocard_container');
             content_infocard.classList.remove('d_none');
         let pokemont_sprite_name = pokemenObjects_toBeSearchedIn[i]['name'];
+        let pokemont_sprite_src_vor = pokemenObjects_toBeSearchedIn[i-1]['sprites']['other']['official-artwork']['front_shiny'];
         let pokemont_sprite_src = pokemenObjects_toBeSearchedIn[i]['sprites']['other']['official-artwork']['front_shiny'];
+        let pokemont_sprite_src_nach = pokemenObjects_toBeSearchedIn[i+1]['sprites']['other']['official-artwork']['front_shiny'];
         let pokemont_sprite_type = pokemenObjects_toBeSearchedIn[i]['types'][0]['type']['name'];
         let pokemont_sprite_weight = pokemenObjects_toBeSearchedIn[i]['weight'];
         let pokemont_sprite_height = pokemenObjects_toBeSearchedIn[i]['height'];
         let pokemont_sprite_stats0 = pokemenObjects_toBeSearchedIn[i]['stats'][0]['base_stat'];
         let pokemont_sprite_stats1 = pokemenObjects_toBeSearchedIn[i]['stats'][1]['base_stat'];
         let pokemont_sprite_stats2 = pokemenObjects_toBeSearchedIn[i]['stats'][2]['base_stat'];
+        content_infocard.innerHTML = ``
         content_infocard.innerHTML += `
             <div id="infocard_container" class="infocard_container">
                 <div class="infocard_upperPart">
                     <h1 id="pokemon_name">${pokemont_sprite_name}</h1>
-                    <div class="small_sprite_container"><img src="${pokemont_sprite_src}" class="pokemon_sprite_small_image"></div>
+                    <div class="small_sprite_container">
+                        <img src ="${pokemont_sprite_src_vor}" class="arrow" onclick="show_infocard_container(${i-1})">
+                        <img src="${pokemont_sprite_src}" class="pokemon_sprite_small_image">
+                        <img src ="${pokemont_sprite_src_nach}" class="arrow" onclick="show_infocard_container(${i+1})">
+                    </div>
                 </div>
                 <div class="infocard_lowerPart">
                     <table>
