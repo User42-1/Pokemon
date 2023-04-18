@@ -86,6 +86,7 @@ h1 {
     padding: 10px;
     position: relative;
     right: 25px;
+    cursor: pointer;
 }
 
 .pokeman_sprite_name {
@@ -185,6 +186,12 @@ input::placeholder {
     text-align: center;
 }
 
+.btn_select:hover,
+.btn_futher_pokemon:hover,
+.searchString:hover {
+    cursor: pointer;
+}
+
 /* ******************* Custom Scrollbar ********************* */
 
 /* width */
@@ -208,4 +215,5 @@ input::placeholder {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background-color: rgb(138, 134, 134);
+    cursor: pointer;
 }
